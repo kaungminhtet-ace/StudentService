@@ -15,9 +15,14 @@ const string id = "86cda9bc-b082-4e66-8302-c4532137289e";
 var kaungminhtet = reposity.Get("86cda9bc-b082-4e66-8302-c4532137289e");
 if (kaungminhtet != null)
 {
-    kaungminhtet.Email = "KaungMinHtet@gmail.com";
+    kaungminhtet.Email = "kaungminttet@gmail.com";
     reposity.Update(id, kaungminhtet);
 }
+
+kaungminhtet = reposity.Get("86cda9bc-b082-4e66-8302-c4532137289e");
+Console.WriteLine(kaungminhtet);
+
+reposity.Delete(id);
 
 kaungminhtet = reposity.Get("86cda9bc-b082-4e66-8302-c4532137289e");
 Console.WriteLine(kaungminhtet);

@@ -30,4 +30,12 @@ public class Repository(NpgsqlConnection connection)
         using var cmd = StudentMapper.MapToParameters(connection, sql,studentEntity);
         return cmd.ExecuteNonQuery();
     }
+
+    public int Delete(string id)
+    {
+        string sql = "DELETE FROM students WHERE id = @id";
+        using var cmd = new NpgsqlCommand(sql, connection);
+        cmd.Parameters.AddWithValue("id", id);
+        return cmd.ExecuteNonQuery();
+    }
 }
