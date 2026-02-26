@@ -20,14 +20,14 @@ public class Repository(NpgsqlConnection connection)
         string sql = "SELECT id, full_name, email, phone, is_active, created_at, updated_at FROM students WHERE id = @id";
         using var cmd = new NpgsqlCommand(sql, connection);
         cmd.Parameters.AddWithValue("id", id);
-        var reader = cmd.ExecuteReader();
+        using var reader = cmd.ExecuteReader();
         return !reader.Read() ? null : StudentMapper.MapFromReader(reader, sql);
     }
 
     public int Update(string id, StudentEntity studentEntity)
     {
-        string sql = "UPDATE users SET full_name=@u, email=@e, phone=@p WHERE id=@id";
-        var cmd = StudentMapper.MapToParameters(connection, sql,studentEntity);
+        string sql = "UPDATE students SET full_name=@f, email=@e, phone=@p, updated_at=@u WHERE id=@i";
+        using var cmd = StudentMapper.MapToParameters(connection, sql,studentEntity);
         return cmd.ExecuteNonQuery();
     }
 }
